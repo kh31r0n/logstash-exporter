@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: logstash-exporter
+  name: logstash-exporter
+  namespace: logstash
+spec:
+  ports:
+  - name: prometheus
+    port: 9298
+    targetPort: 9298
+    protocol: TCP
+  externalIPs:
+  - x.y.z.w
+  selector:
+    app: logstash-exporter
+status:
+  loadBalancer:
+
