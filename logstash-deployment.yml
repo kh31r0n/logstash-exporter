@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logstash-exporter
+  namespace: logstash
+  labels:
+    app: logstash-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logstash-exporter
+  template:
+    metadata:
+      labels:
+        app: logstash-exporter
+    spec:
+      containers:
+        - name: logstash-exporter
+          image: neo-har-lnx-col01.hyper.com/analitica/logstash-exporter:0.1
+          command: ["/logstash_exporter", "--logstash.endpoint=http://x.y.z.w:9443", "--listen.address=:9298"]
+          imagePullPolicy: Always
+          env:
+          ports:
+            - name: prometheus
+              containerPort: 9298
+      imagePullSecrets:
+      - name: regcred
+      volumes:
+
+
