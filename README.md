@@ -103,3 +103,19 @@ need some love.
 
 In order to execute manual integration tests (to be sure certain logstash version is compatible with logstash_exporter),
 you can follow instructions [here](integration-tests/README.md).
+
+### CLI
+
+```sh
+docker run -it --rm -d -p 9443:9443 neo-har-lnx-col01.neosecure.com/analitica/logstash-exporter:0.1 ./logstash_exporter --logstash.endpoint="<http://localhost:9600>" --listen.address=":9443"
+```
+
+Para que funcione correctamente hay que cambiar el logstash.yml
+
+```sh
+# ------------ Metrics Settings --------------
+#
+# Bind address for the metrics REST endpoint
+#
+http.host: "0.0.0.0"
+```
